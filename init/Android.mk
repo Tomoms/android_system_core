@@ -26,12 +26,10 @@ endif
 
 ifneq (,$(filter eng,$(TARGET_BUILD_VARIANT)))
 init_options += \
-    -DSHUTDOWN_ZERO_TIMEOUT=1 \
-    -DSPOOF_SAFETYNET=0
+    -DSHUTDOWN_ZERO_TIMEOUT=1
 else
 init_options += \
-    -DSHUTDOWN_ZERO_TIMEOUT=0 \
-    -DSPOOF_SAFETYNET=1
+    -DSHUTDOWN_ZERO_TIMEOUT=0
 endif
 
 init_options += -DLOG_UEVENTS=0 \
