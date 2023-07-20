@@ -360,7 +360,7 @@ bool Worker::ReadAlignedSector(sector_t sector, size_t sz, bool header_response)
                     header->type = DM_USER_RESP_ERROR;
                 }
 
-                ret = BLOCK_SZ;
+                ret = std::min(BLOCK_SZ, read_size);
             }
 
             // Just return the header if it is an error
