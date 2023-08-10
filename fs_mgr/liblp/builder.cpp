@@ -1305,9 +1305,9 @@ bool MetadataBuilder::VerifyExtentsAgainstSourceMetadata(
         auto target_partition_name = base_name + SlotSuffixForSlotNumber(target_slot_number);
         const auto target_partition = target_metadata.FindPartition(target_partition_name);
         if (!target_partition) {
-            LERROR << "Failed to find partition " << target_partition_name << " in metadata slot "
+            LINFO << "Failed to find partition " << target_partition_name << " in metadata slot "
                    << target_slot_number;
-            return false;
+            continue;
         }
 
         auto source_partition_name = base_name + SlotSuffixForSlotNumber(source_slot_number);
