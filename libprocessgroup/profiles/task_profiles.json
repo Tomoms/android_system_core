@@ -728,7 +728,7 @@
           "Params":
           {
             "Controller": "cpuset",
-            "Path": "system-background"
+            "Path": "display"
           }
         }
       ]
@@ -741,7 +741,7 @@
           "Params":
           {
             "Controller": "cpuset",
-            "Path": "system-background"
+            "Path": "display"
           }
         }
       ]
