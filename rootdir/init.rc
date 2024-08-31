@@ -1143,7 +1143,6 @@ on zygote-start
 on boot && property:ro.config.low_ram=true
     # Tweak background writeout
     write /proc/sys/vm/dirty_expire_centisecs 200
-    write /proc/sys/vm/dirty_background_ratio  5
 
 on boot && property:suspend.disable_sync_on_suspend=true
     write /sys/power/sync_on_suspend 0
@@ -1188,7 +1187,6 @@ on boot
     write /dev/sys/fs/by-name/userdata/iostat_period_ms 1000
     write /dev/sys/fs/by-name/userdata/iostat_enable 0
     write /proc/sys/vm/dirty_expire_centisecs 3000
-    write /proc/sys/vm/dirty_background_ratio  10
 
     # set readahead multiplier for POSIX_FADV_SEQUENTIAL files
     write /dev/sys/fs/by-name/userdata/seq_file_ra_mul 128
@@ -1315,12 +1313,10 @@ on property:security.perf_harden=1 && property:sys.init.perf_lsm_hooks=""
 # sysprops to be able to indirectly set these sysctls.
 on property:security.perf_harden=0
     write /proc/sys/kernel/perf_event_max_sample_rate ${debug.perf_event_max_sample_rate:-100000}
-    write /proc/sys/kernel/perf_cpu_time_max_percent ${debug.perf_cpu_time_max_percent:-25}
     write /proc/sys/kernel/perf_event_mlock_kb ${debug.perf_event_mlock_kb:-516}
 # Default values.
 on property:security.perf_harden=1
     write /proc/sys/kernel/perf_event_max_sample_rate 100000
-    write /proc/sys/kernel/perf_cpu_time_max_percent 25
     write /proc/sys/kernel/perf_event_mlock_kb 516
 
 # This property can be set only on userdebug/eng. See neverallow rule in
