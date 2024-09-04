@@ -108,12 +108,6 @@ prebuilt_etc {
 }
 
 prebuilt_etc {
-    name: "etc_hosts",
-    src: "etc/hosts",
-    filename: "hosts",
-}
-
-prebuilt_etc {
     name: "init-debug.rc",
     src: "init-debug.rc",
     sub_dir: "init",
