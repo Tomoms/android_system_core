@@ -1393,18 +1393,6 @@ on property:ro.debuggable=1
 on init && property:ro.debuggable=1 && property:ro.console.enable=1
     start console
 
-# Multi-Gen LRU Experiment
-on property:persist.device_config.mglru_native.lru_gen_config=none
-  write /sys/kernel/mm/lru_gen/enabled 0
-on property:persist.device_config.mglru_native.lru_gen_config=core
-  write /sys/kernel/mm/lru_gen/enabled 1
-on property:persist.device_config.mglru_native.lru_gen_config=core_and_mm_walk
-  write /sys/kernel/mm/lru_gen/enabled 3
-on property:persist.device_config.mglru_native.lru_gen_config=core_and_nonleaf_young
-  write /sys/kernel/mm/lru_gen/enabled 5
-on property:persist.device_config.mglru_native.lru_gen_config=all
-  write /sys/kernel/mm/lru_gen/enabled 7
-
 # Allow other processes to run `snapshotctl` through `init`. This requires
 # `set_prop` permission on `snapshotctl_prop`.
 on property:sys.snapshotctl.map=requested
@@ -1417,3 +1405,23 @@ on property:sys.snapshotctl.map=requested
 on property:sys.snapshotctl.unmap=requested
     exec - root root system -- /system/bin/snapshotctl unmap
     setprop sys.snapshotctl.unmap "finished"
+
+on boot
+    write /sys/kernel/mm/lru_gen/enabled 5
+    write /proc/sys/vm/extfrag_threshold 750
+    write /proc/sys/vm/watermark_boost_factor 1
+    write /proc/sys/vm/page_lock_unfairness 1
+    write /sys/kernel/mm/transparent_hugepage/enabled "madvise"
+    write /sys/kernel/mm/transparent_hugepage/khugepaged/defrag 0
+    write /sys/devices/system/cpu/cpu0/cpufreq/sched_pixel/up_rate_limit_us 2000
+    write /sys/devices/system/cpu/cpu0/cpufreq/sched_pixel/down_rate_limit_us 2000
+    write /sys/devices/system/cpu/cpu4/cpufreq/sched_pixel/up_rate_limit_us 2000
+    write /sys/devices/system/cpu/cpu4/cpufreq/sched_pixel/down_rate_limit_us 2000
+    write /sys/devices/system/cpu/cpu6/cpufreq/sched_pixel/up_rate_limit_us 2000
+    write /sys/devices/system/cpu/cpu6/cpufreq/sched_pixel/down_rate_limit_us 2000
+    write /sys/devices/system/cpu/cpu0/cpufreq/schedutil/up_rate_limit_us 2000
+    write /sys/devices/system/cpu/cpu0/cpufreq/schedutil/down_rate_limit_us 2000
+    write /sys/devices/system/cpu/cpu4/cpufreq/schedutil/up_rate_limit_us 2000
+    write /sys/devices/system/cpu/cpu4/cpufreq/schedutil/down_rate_limit_us 2000
+    write /sys/devices/system/cpu/cpu6/cpufreq/schedutil/up_rate_limit_us 2000
+    write /sys/devices/system/cpu/cpu6/cpufreq/schedutil/down_rate_limit_us 2000
