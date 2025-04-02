@@ -361,7 +361,7 @@ on init
     write /proc/sys/kernel/sched_migration_cost_ns 50000
     write /proc/sys/kernel/sched_rt_runtime_us 980000
     write /proc/sys/vm/page-cluster 0
-    write /proc/sys/vm/stat_interval 120
+    write /proc/sys/vm/stat_interval 1000
     write /proc/sys/vm/compact_unevictable_allowed 0
 
     write /proc/sys/kernel/randomize_va_space 2
